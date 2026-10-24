@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#17091f">
+  <meta name="description" content="A Halloween birthday arcade made with love.">
+  <title>Happy Birthday, Mom!</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Orbitron:wght@800;900&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="home-page">
+  <div class="ambient-glow" aria-hidden="true"></div>
+  <main class="home-shell">
+    <header class="topline">
+      <span class="moon-mark" aria-hidden="true">☾</span>
+      <span>THE HALLOWEEN ARCADE</span>
+      <span class="topline-star" aria-hidden="true">✦</span>
+    </header>
+
+    <section class="hero-card" id="hero-card">
+      <img class="mom-photo hidden" id="mom-photo" alt="">
+      <div class="moon-scene" aria-hidden="true">
+        <div class="moon"></div>
+        <span class="bat bat-one">⌁</span>
+        <span class="bat bat-two">⌁</span>
+        <span class="spark spark-one">✦</span>
+        <span class="spark spark-two">✧</span>
+        <div class="hill hill-back"></div>
+        <div class="hill hill-front"></div>
+        <div class="pumpkin pumpkin-one"><span></span></div>
+        <div class="pumpkin pumpkin-two"><span></span></div>
+      </div>
+
+      <div class="hero-copy">
+        <p class="eyebrow">A LITTLE MAGIC, JUST FOR YOU</p>
+        <h1>Happy Birthday,<br><span id="mom-name-heading">Mom</span>!</h1>
+        <p class="intro">A little Halloween magic, a little arcade nostalgia, and a whole lot of love.</p>
+        <button class="primary-button" id="enter-arcade" type="button">
+          <span aria-hidden="true">✦</span> Enter the Arcade
+        </button>
+        <p class="small-note">Made especially for you</p>
+      </div>
+    </section>
+
+    <section class="mode-section" aria-labelledby="mode-heading">
+      <h2 id="mode-heading">Choose your adventure</h2>
+      <p class="section-note">You can change modes again inside the arcade.</p>
+      <div class="mode-grid">
+        <button class="mode-card normal-card" data-mode="normal" type="button">
+          <span class="mode-symbol" aria-hidden="true">✦</span>
+          <span class="mode-title">Normal Mode</span>
+          <span class="mode-description">Colorful retro space</span>
+        </button>
+        <button class="mode-card halloween-card selected" data-mode="halloween" type="button">
+          <span class="mode-symbol" aria-hidden="true">🎃</span>
+          <span class="mode-title">Halloween Mode</span>
+          <span class="mode-description">Spooky space surprises</span>
+        </button>
+      </div>
+    </section>
+    <footer>Built with love, one line of code at a time.</footer>
+  </main>
+  <script src="images.js"></script>
+  <script>
+    // Stage 1: the mode choice is remembered as we enter the arcade.
+    const enterButton = document.querySelector("#enter-arcade");
+    const modeButtons = document.querySelectorAll("[data-mode]");
+    let selectedMode = "halloween";
+
+    modeButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        selectedMode = button.dataset.mode;
+        modeButtons.forEach((item) => item.classList.toggle("selected", item === button));
+      });
+    });
+
+    enterButton.addEventListener("click", () => {
+      sessionStorage.setItem("birthdayArcadeMode", selectedMode);
+      window.location.href = "game.html";
+    });
+
+    // Optional personalization: change "Mom" here to her name or nickname.
+    const momName = "Mom";
+    document.querySelector("#mom-name-heading").textContent = momName;
+
+    // Optional pictures from the images folder.
+    loadImage("mom").then((img) => {
+      if (!img) return;
+      const photo = document.querySelector("#mom-photo");
+      photo.src = img.src; photo.classList.remove("hidden");
+      document.querySelector("#hero-card").classList.add("has-photo");
+    });
+    loadImage("homeBg").then((img) => {
+      if (!img) return;
+      const hero = document.querySelector("#hero-card");
+      hero.style.setProperty("--hero-img", `url(${img.src})`);
+      hero.classList.add("has-bg");
+    });
+  </script>
+</body>
+</html>

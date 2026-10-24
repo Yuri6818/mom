@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#17091f">
+  <title>Mom's Birthday Arcade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Orbitron:wght@800;900&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="arcade-page">
+  <main class="game-shell">
+    <section class="game-panel menu-panel" id="main-menu">
+      <div class="logo"><span class="logo-a">ASTEROIDS</span><span class="logo-b" id="edition">HALLOWEEN EDITION</span></div>
+      <p class="best-line" id="best-line"></p>
+      <div class="menu-buttons">
+        <button class="play-btn" id="start-game" type="button">PLAY</button>
+        <button id="open-settings" type="button"><span class="mi">⚙</span> GAME SETTINGS</button>
+        <button id="open-cheats" type="button"><span class="mi">★</span> CHEAT CODES</button>
+        <button id="open-scores" type="button"><span class="mi">🏆</span> HIGH SCORES</button>
+        <button id="home-button" type="button"><span class="mi">←</span> BACK</button>
+      </div>
+      <p class="tip">Tip: hold the buttons to steer and fire. Turn on Auto-Fire in Cheat Codes to make it easier.</p>
+    </section>
+
+    <section class="game-panel hidden" id="cheat-menu">
+      <h1 class="panel-title">CHEAT CODES</h1>
+      <p class="panel-note">Turn on any helpers you like. You can also change them while the game is paused.</p>
+      <div class="cheat-list" id="cheat-list"></div>
+      <div class="menu-buttons"><button data-back type="button"><span class="mi">←</span> BACK</button></div>
+    </section>
+
+    <section class="game-panel hidden" id="settings-menu">
+      <h1 class="panel-title">GAME SETTINGS</h1>
+      <h3 class="group">Game Mode</h3>
+      <div class="seg">
+        <button data-mode-choice="normal" type="button">Normal<small>Colorful space</small></button>
+        <button data-mode-choice="halloween" type="button">Halloween 🎃<small>Spooky space</small></button>
+      </div>
+      <h3 class="group">Sound</h3>
+      <div class="cheat-list">
+        <div class="cheat-row"><div class="cheat-copy"><strong>Music</strong></div><button class="switch" type="button" role="switch" aria-checked="false" data-set="music" aria-label="Music"></button></div>
+        <div class="cheat-row"><div class="cheat-copy"><strong>Sound effects</strong></div><button class="switch" type="button" role="switch" aria-checked="false" data-set="sfx" aria-label="Sound effects"></button></div>
+      </div>
+      <h3 class="group">Difficulty</h3>
+      <div class="seg three">
+        <button data-diff="easy" type="button">Easy<small>5 lives, slower</small></button>
+        <button data-diff="normal" type="button">Normal<small>3 lives</small></button>
+        <button data-diff="hard" type="button">Hard<small>3 lives, faster</small></button>
+      </div>
+      <div class="menu-buttons"><button data-back type="button"><span class="mi">←</span> BACK</button></div>
+    </section>
+
+    <section class="game-panel hidden" id="scores-menu">
+      <h1 class="panel-title">HIGH SCORES</h1>
+      <div id="scores-list"></div>
+      <div class="menu-buttons"><button data-back type="button"><span class="mi">←</span> BACK</button></div>
+    </section>
+    <footer>Made with love for the best Mom</footer>
+  </main>
+
+  <section id="play" class="hidden">
+    <canvas id="cv"></canvas>
+    <div id="hud">
+      <div><small>SCORE</small><span class="num" id="score">0</span></div>
+      <div class="mid"><small>Level <span id="level">1</span> &middot; Best <span id="best">0</span></small><span id="lives"></span></div>
+      <button id="pause-btn" type="button" aria-label="Pause">&#10074;&#10074;</button>
+    </div>
+    <div id="toast"></div>
+    <div id="controls">
+      <div><button class="ctl" data-k="l" type="button" aria-label="Turn left">&#9664;</button><button class="ctl" data-k="r" type="button" aria-label="Turn right">&#9654;</button></div>
+      <div><button class="ctl" data-k="t" type="button" aria-label="Thrust">&#9650;</button><button class="ctl fire" data-k="f" type="button" aria-label="Fire">FIRE</button></div>
+    </div>
+    <div class="overlay hidden" id="pause-ov"><div>
+      <h1 class="panel-title">PAUSED</h1>
+      <div class="menu-buttons">
+        <button class="play-btn" id="resume" type="button">RESUME</button>
+        <button id="restart" type="button"><span class="mi">↻</span> RESTART</button>
+        <button id="quit" type="button"><span class="mi">←</span> BACK TO MENU</button>
+      </div>
+      <h3 class="group">Cheat codes</h3>
+      <div class="cheat-list" id="pause-cheats"></div>
+    </div></div>
+    <div class="overlay victory hidden" id="over-ov"><div>
+      <div class="pumpkin-big">🎃</div>
+      <h1 class="panel-title" id="over-title">GAME OVER</h1>
+      <p class="big-score" id="final-score">0</p>
+      <p class="over-msg" id="over-msg"></p>
+      <div class="menu-buttons">
+        <button class="play-btn" id="again" type="button"><span class="mi">↻</span> PLAY AGAIN</button>
+        <button id="quit2" type="button"><span class="mi">⌂</span> BACK TO MENU</button>
+      </div>
+    </div></div>
+  </section>
+  <script src="images.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
